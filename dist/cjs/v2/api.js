@@ -336,7 +336,7 @@ exports.RedemptionTypeEnum = {
     Unlimited: 'unlimited'
 };
 /**
- * * `b2b-disallowed` - b2b-disallowed * `b2b-error-no-contract` - b2b-error-no-contract * `b2b-error-no-product` - b2b-error-no-product * `b2b-error-missing-enrollment-code` - b2b-error-missing-enrollment-code * `b2b-error-invalid-enrollment-code` - b2b-error-invalid-enrollment-code * `b2b-error-requires-checkout` - b2b-error-requires-checkout * `b2b-enroll-success` - b2b-enroll-success
+ * * `b2b-disallowed` - b2b-disallowed * `b2b-error-no-contract` - b2b-error-no-contract * `b2b-error-no-product` - b2b-error-no-product * `b2b-error-missing-enrollment-code` - b2b-error-missing-enrollment-code * `b2b-error-invalid-enrollment-code` - b2b-error-invalid-enrollment-code * `b2b-error-requires-checkout` - b2b-error-requires-checkout * `b2b-error-not-enrollable` - b2b-error-not-enrollable * `b2b-enroll-success` - b2b-enroll-success
  * @export
  * @enum {string}
  */
@@ -365,6 +365,10 @@ exports.ResultEnum = {
     * b2b-error-requires-checkout
     */
     ErrorRequiresCheckout: 'b2b-error-requires-checkout',
+    /**
+    * b2b-error-not-enrollable
+    */
+    ErrorNotEnrollable: 'b2b-error-not-enrollable',
     /**
     * b2b-enroll-success
     */

@@ -4383,7 +4383,7 @@ export declare const RedemptionTypeEnum: {
 };
 export type RedemptionTypeEnum = typeof RedemptionTypeEnum[keyof typeof RedemptionTypeEnum];
 /**
- * * `b2b-disallowed` - b2b-disallowed * `b2b-error-no-contract` - b2b-error-no-contract * `b2b-error-no-product` - b2b-error-no-product * `b2b-error-missing-enrollment-code` - b2b-error-missing-enrollment-code * `b2b-error-invalid-enrollment-code` - b2b-error-invalid-enrollment-code * `b2b-error-requires-checkout` - b2b-error-requires-checkout * `b2b-enroll-success` - b2b-enroll-success
+ * * `b2b-disallowed` - b2b-disallowed * `b2b-error-no-contract` - b2b-error-no-contract * `b2b-error-no-product` - b2b-error-no-product * `b2b-error-missing-enrollment-code` - b2b-error-missing-enrollment-code * `b2b-error-invalid-enrollment-code` - b2b-error-invalid-enrollment-code * `b2b-error-requires-checkout` - b2b-error-requires-checkout * `b2b-error-not-enrollable` - b2b-error-not-enrollable * `b2b-enroll-success` - b2b-enroll-success
  * @export
  * @enum {string}
  */
@@ -4412,6 +4412,10 @@ export declare const ResultEnum: {
     * b2b-error-requires-checkout
     */
     readonly ErrorRequiresCheckout: "b2b-error-requires-checkout";
+    /**
+    * b2b-error-not-enrollable
+    */
+    readonly ErrorNotEnrollable: "b2b-error-not-enrollable";
     /**
     * b2b-enroll-success
     */
@@ -6706,6 +6710,43 @@ export interface V3ProgramCertificate {
     'link': string;
 }
 /**
+ * Program Model Serializer v2
+ * @export
+ * @interface V3SimpleProgram
+ */
+export interface V3SimpleProgram {
+    /**
+     *
+     * @type {string}
+     * @memberof V3SimpleProgram
+     */
+    'title': string;
+    /**
+     *
+     * @type {string}
+     * @memberof V3SimpleProgram
+     */
+    'readable_id': string;
+    /**
+     *
+     * @type {number}
+     * @memberof V3SimpleProgram
+     */
+    'id': number;
+    /**
+     *
+     * @type {string}
+     * @memberof V3SimpleProgram
+     */
+    'program_type'?: string | null;
+    /**
+     *
+     * @type {boolean}
+     * @memberof V3SimpleProgram
+     */
+    'live'?: boolean;
+}
+/**
  * Serializer for user program enrollments.
  * @export
  * @interface V3UserProgramEnrollment
@@ -6713,10 +6754,10 @@ export interface V3ProgramCertificate {
 export interface V3UserProgramEnrollment {
     /**
      *
-     * @type {number}
+     * @type {V3SimpleProgram}
      * @memberof V3UserProgramEnrollment
      */
-    'program_id': number;
+    'program': V3SimpleProgram;
     /**
      *
      * @type {V3ProgramCertificate}
