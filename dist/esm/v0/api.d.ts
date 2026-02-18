@@ -827,13 +827,13 @@ export interface CoursePageItem {
      * @type {number}
      * @memberof CoursePageItem
      */
-    'min_price': number | null;
+    'min_price': number;
     /**
      * Specify the maximum product price. This is used by MIT Learn.
      * @type {number}
      * @memberof CoursePageItem
      */
-    'max_price': number | null;
+    'max_price': number;
     /**
      * A short description indicating prerequisites of this course/program.
      * @type {string}
@@ -1119,6 +1119,55 @@ export interface CourseRunEnrollmentRequestV2Request {
     'run_id': number;
 }
 /**
+ * CourseRunEnrollment model serializer
+ * @export
+ * @interface CourseRunEnrollmentV3
+ */
+export interface CourseRunEnrollmentV3 {
+    /**
+     *
+     * @type {number}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'id': number;
+    /**
+     *
+     * @type {number}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'run_id': number;
+    /**
+     *
+     * @type {number}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'course_id': number;
+    /**
+     *
+     * @type {number}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'b2b_organization_id': number | null;
+    /**
+     *
+     * @type {number}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'b2b_contract_id': number | null;
+    /**
+     *
+     * @type {EnrollmentModeEnum}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'enrollment_mode': EnrollmentModeEnum;
+    /**
+     *
+     * @type {V3CourseRunCertificate}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'certificate': V3CourseRunCertificate | null;
+}
+/**
  * CourseRunGrade serializer
  * @export
  * @interface CourseRunGrade
@@ -1135,19 +1184,19 @@ export interface CourseRunGrade {
      * @type {string}
      * @memberof CourseRunGrade
      */
-    'letter_grade'?: string | null;
+    'letter_grade': string | null;
     /**
      *
      * @type {boolean}
      * @memberof CourseRunGrade
      */
-    'passed'?: boolean;
+    'passed': boolean;
     /**
      *
      * @type {boolean}
      * @memberof CourseRunGrade
      */
-    'set_by_admin'?: boolean;
+    'set_by_admin': boolean;
     /**
      * Returns the grade field value as a number out of 100 (or Decimal(0) if the value is None)
      * @type {number}
@@ -4225,13 +4274,13 @@ export interface ProgramPageItem {
      * @type {number}
      * @memberof ProgramPageItem
      */
-    'min_price': number | null;
+    'min_price': number;
     /**
      * Specify the maximum product price. This is used by MIT Learn.
      * @type {number}
      * @memberof ProgramPageItem
      */
-    'max_price': number | null;
+    'max_price': number;
     /**
      * A short description indicating prerequisites of this course/program.
      * @type {string}
@@ -6691,6 +6740,25 @@ export interface V2UserProgramEnrollmentDetail {
     'certificate': ProgramCertificate | null;
 }
 /**
+ * CourseRunCertificate model serializer
+ * @export
+ * @interface V3CourseRunCertificate
+ */
+export interface V3CourseRunCertificate {
+    /**
+     *
+     * @type {string}
+     * @memberof V3CourseRunCertificate
+     */
+    'uuid': string;
+    /**
+     * Get the link at which this certificate will be served Format: /certificate/<uuid>/ Example: /certificate/93ebd74e-5f88-4b47-bb09-30a6d575328f/
+     * @type {string}
+     * @memberof V3CourseRunCertificate
+     */
+    'link': string;
+}
+/**
  * ProgramCertificate model serializer
  * @export
  * @interface V3ProgramCertificate
@@ -8314,11 +8382,11 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     apiV2CoursesList: (contract_id?: number, courserun_is_enrollable?: boolean, id?: Array<number>, include_approved_financial_aid?: boolean, live?: boolean, org_id?: number, page?: number, page__live?: boolean, page_size?: number, readable_id?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieve a specific course - API v2
-     * @param {number} id A unique integer value identifying this course.
+     * @param {string} id A unique integer value (pk) or readable_id string identifying this course.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    apiV2CoursesRetrieve: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    apiV2CoursesRetrieve: (id: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * CoursesApi - functional programming interface
@@ -8363,11 +8431,11 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     apiV2CoursesList(contract_id?: number, courserun_is_enrollable?: boolean, id?: Array<number>, include_approved_financial_aid?: boolean, live?: boolean, org_id?: number, page?: number, page__live?: boolean, page_size?: number, readable_id?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedCourseWithCourseRunsSerializerV2List>>;
     /**
      * Retrieve a specific course - API v2
-     * @param {number} id A unique integer value identifying this course.
+     * @param {string} id A unique integer value (pk) or readable_id string identifying this course.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    apiV2CoursesRetrieve(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseWithCourseRunsSerializerV2>>;
+    apiV2CoursesRetrieve(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseWithCourseRunsSerializerV2>>;
 };
 /**
  * CoursesApi - factory interface
@@ -8539,11 +8607,11 @@ export interface CoursesApiApiV2CoursesListRequest {
  */
 export interface CoursesApiApiV2CoursesRetrieveRequest {
     /**
-     * A unique integer value identifying this course.
-     * @type {number}
+     * A unique integer value (pk) or readable_id string identifying this course.
+     * @type {string}
      * @memberof CoursesApiApiV2CoursesRetrieve
      */
-    readonly id: number;
+    readonly id: string;
 }
 /**
  * CoursesApi - object-oriented interface
@@ -10550,6 +10618,13 @@ export declare const EnrollmentsApiAxiosParamCreator: (configuration?: Configura
      */
     enrollmentsPartialUpdate: (id: number, PatchedUpdateCourseRunEnrollmentRequest?: PatchedUpdateCourseRunEnrollmentRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * API view set for user enrollments - v3
+     * @param {number} id A unique integer value identifying this course run enrollment.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    enrollmentsRetrieve: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * API view set for user enrollments
      * @param {number} id A unique integer value identifying this course run enrollment.
      * @param {CourseRunEnrollmentRequest} CourseRunEnrollmentRequest
@@ -10579,6 +10654,14 @@ export declare const EnrollmentsApiAxiosParamCreator: (configuration?: Configura
      * @throws {RequiredError}
      */
     userEnrollmentsListV2: (exclude_b2b?: boolean, org_id?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+     * @param {boolean} [exclude_b2b] Exclude B2B enrollments (enrollments linked to course runs with B2B contracts)
+     * @param {number} [org_id] Filter by B2B organization ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsListV3: (exclude_b2b?: boolean, org_id?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * EnrollmentsApi - functional programming interface
@@ -10620,6 +10703,13 @@ export declare const EnrollmentsApiFp: (configuration?: Configuration) => {
      */
     enrollmentsPartialUpdate(id: number, PatchedUpdateCourseRunEnrollmentRequest?: PatchedUpdateCourseRunEnrollmentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseRunEnrollment>>;
     /**
+     * API view set for user enrollments - v3
+     * @param {number} id A unique integer value identifying this course run enrollment.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    enrollmentsRetrieve(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseRunEnrollmentV3>>;
+    /**
      * API view set for user enrollments
      * @param {number} id A unique integer value identifying this course run enrollment.
      * @param {CourseRunEnrollmentRequest} CourseRunEnrollmentRequest
@@ -10649,6 +10739,14 @@ export declare const EnrollmentsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     userEnrollmentsListV2(exclude_b2b?: boolean, org_id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CourseRunEnrollmentRequestV2>>>;
+    /**
+     * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+     * @param {boolean} [exclude_b2b] Exclude B2B enrollments (enrollments linked to course runs with B2B contracts)
+     * @param {number} [org_id] Filter by B2B organization ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsListV3(exclude_b2b?: boolean, org_id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CourseRunEnrollmentV3>>>;
 };
 /**
  * EnrollmentsApi - factory interface
@@ -10689,6 +10787,13 @@ export declare const EnrollmentsApiFactory: (configuration?: Configuration, base
      */
     enrollmentsPartialUpdate(requestParameters: EnrollmentsApiEnrollmentsPartialUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<CourseRunEnrollment>;
     /**
+     * API view set for user enrollments - v3
+     * @param {EnrollmentsApiEnrollmentsRetrieveRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    enrollmentsRetrieve(requestParameters: EnrollmentsApiEnrollmentsRetrieveRequest, options?: RawAxiosRequestConfig): AxiosPromise<CourseRunEnrollmentV3>;
+    /**
      * API view set for user enrollments
      * @param {EnrollmentsApiEnrollmentsUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -10716,6 +10821,13 @@ export declare const EnrollmentsApiFactory: (configuration?: Configuration, base
      * @throws {RequiredError}
      */
     userEnrollmentsListV2(requestParameters?: EnrollmentsApiUserEnrollmentsListV2Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<CourseRunEnrollmentRequestV2>>;
+    /**
+     * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+     * @param {EnrollmentsApiUserEnrollmentsListV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsListV3(requestParameters?: EnrollmentsApiUserEnrollmentsListV3Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<CourseRunEnrollmentV3>>;
 };
 /**
  * Request parameters for enrollmentsCreate operation in EnrollmentsApi.
@@ -10761,6 +10873,19 @@ export interface EnrollmentsApiEnrollmentsPartialUpdateRequest {
      * @memberof EnrollmentsApiEnrollmentsPartialUpdate
      */
     readonly PatchedUpdateCourseRunEnrollmentRequest?: PatchedUpdateCourseRunEnrollmentRequest;
+}
+/**
+ * Request parameters for enrollmentsRetrieve operation in EnrollmentsApi.
+ * @export
+ * @interface EnrollmentsApiEnrollmentsRetrieveRequest
+ */
+export interface EnrollmentsApiEnrollmentsRetrieveRequest {
+    /**
+     * A unique integer value identifying this course run enrollment.
+     * @type {number}
+     * @memberof EnrollmentsApiEnrollmentsRetrieve
+     */
+    readonly id: number;
 }
 /**
  * Request parameters for enrollmentsUpdate operation in EnrollmentsApi.
@@ -10827,6 +10952,25 @@ export interface EnrollmentsApiUserEnrollmentsListV2Request {
     readonly org_id?: number;
 }
 /**
+ * Request parameters for userEnrollmentsListV3 operation in EnrollmentsApi.
+ * @export
+ * @interface EnrollmentsApiUserEnrollmentsListV3Request
+ */
+export interface EnrollmentsApiUserEnrollmentsListV3Request {
+    /**
+     * Exclude B2B enrollments (enrollments linked to course runs with B2B contracts)
+     * @type {boolean}
+     * @memberof EnrollmentsApiUserEnrollmentsListV3
+     */
+    readonly exclude_b2b?: boolean;
+    /**
+     * Filter by B2B organization ID
+     * @type {number}
+     * @memberof EnrollmentsApiUserEnrollmentsListV3
+     */
+    readonly org_id?: number;
+}
+/**
  * EnrollmentsApi - object-oriented interface
  * @export
  * @class EnrollmentsApi
@@ -10872,6 +11016,14 @@ export declare class EnrollmentsApi extends BaseAPI {
      */
     enrollmentsPartialUpdate(requestParameters: EnrollmentsApiEnrollmentsPartialUpdateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseRunEnrollment, any, {}>>;
     /**
+     * API view set for user enrollments - v3
+     * @param {EnrollmentsApiEnrollmentsRetrieveRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    enrollmentsRetrieve(requestParameters: EnrollmentsApiEnrollmentsRetrieveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseRunEnrollmentV3, any, {}>>;
+    /**
      * API view set for user enrollments
      * @param {EnrollmentsApiEnrollmentsUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -10903,6 +11055,14 @@ export declare class EnrollmentsApi extends BaseAPI {
      * @memberof EnrollmentsApi
      */
     userEnrollmentsListV2(requestParameters?: EnrollmentsApiUserEnrollmentsListV2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseRunEnrollmentRequestV2[], any, {}>>;
+    /**
+     * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+     * @param {EnrollmentsApiUserEnrollmentsListV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    userEnrollmentsListV3(requestParameters?: EnrollmentsApiUserEnrollmentsListV3Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseRunEnrollmentV3[], any, {}>>;
 }
 /**
  * OrdersApi - axios parameter creator
@@ -12291,11 +12451,11 @@ export declare const ProgramsApiAxiosParamCreator: (configuration?: Configuratio
     programsRetrieveV1: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * API view set for Programs - v2
-     * @param {number} id A unique integer value identifying this program.
+     * @param {string} id A unique integer value (pk) or readable_id string identifying this program.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    programsRetrieveV2: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    programsRetrieveV2: (id: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * ProgramsApi - functional programming interface
@@ -12336,11 +12496,11 @@ export declare const ProgramsApiFp: (configuration?: Configuration) => {
     programsRetrieveV1(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Program>>;
     /**
      * API view set for Programs - v2
-     * @param {number} id A unique integer value identifying this program.
+     * @param {string} id A unique integer value (pk) or readable_id string identifying this program.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    programsRetrieveV2(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2Program>>;
+    programsRetrieveV2(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2Program>>;
 };
 /**
  * ProgramsApi - factory interface
@@ -12488,11 +12648,11 @@ export interface ProgramsApiProgramsRetrieveV1Request {
  */
 export interface ProgramsApiProgramsRetrieveV2Request {
     /**
-     * A unique integer value identifying this program.
-     * @type {number}
+     * A unique integer value (pk) or readable_id string identifying this program.
+     * @type {string}
      * @memberof ProgramsApiProgramsRetrieveV2
      */
-    readonly id: number;
+    readonly id: string;
 }
 /**
  * ProgramsApi - object-oriented interface

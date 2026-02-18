@@ -2770,7 +2770,7 @@ export const CoursesApiAxiosParamCreator = function (configuration) {
         }),
         /**
          * Retrieve a specific course - API v2
-         * @param {number} id A unique integer value identifying this course.
+         * @param {string} id A unique integer value (pk) or readable_id string identifying this course.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2867,7 +2867,7 @@ export const CoursesApiFp = function (configuration) {
         },
         /**
          * Retrieve a specific course - API v2
-         * @param {number} id A unique integer value identifying this course.
+         * @param {string} id A unique integer value (pk) or readable_id string identifying this course.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5629,6 +5629,34 @@ export const EnrollmentsApiAxiosParamCreator = function (configuration) {
             };
         }),
         /**
+         * API view set for user enrollments - v3
+         * @param {number} id A unique integer value identifying this course run enrollment.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        enrollmentsRetrieve: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('enrollmentsRetrieve', 'id', id);
+            const localVarPath = `/api/v3/enrollments/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
          * API view set for user enrollments
          * @param {number} id A unique integer value identifying this course run enrollment.
          * @param {CourseRunEnrollmentRequest} CourseRunEnrollmentRequest
@@ -5750,6 +5778,38 @@ export const EnrollmentsApiAxiosParamCreator = function (configuration) {
                 options: localVarRequestOptions,
             };
         }),
+        /**
+         * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+         * @param {boolean} [exclude_b2b] Exclude B2B enrollments (enrollments linked to course runs with B2B contracts)
+         * @param {number} [org_id] Filter by B2B organization ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsListV3: (exclude_b2b_1, org_id_1, ...args_1) => __awaiter(this, [exclude_b2b_1, org_id_1, ...args_1], void 0, function* (exclude_b2b, org_id, options = {}) {
+            const localVarPath = `/api/v3/enrollments/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            if (exclude_b2b !== undefined) {
+                localVarQueryParameter['exclude_b2b'] = exclude_b2b;
+            }
+            if (org_id !== undefined) {
+                localVarQueryParameter['org_id'] = org_id;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
     };
 };
 /**
@@ -5834,6 +5894,21 @@ export const EnrollmentsApiFp = function (configuration) {
             });
         },
         /**
+         * API view set for user enrollments - v3
+         * @param {number} id A unique integer value identifying this course run enrollment.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        enrollmentsRetrieve(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.enrollmentsRetrieve(id, options);
+                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const operationBasePath = (_c = (_b = operationServerMap['EnrollmentsApi.enrollmentsRetrieve']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            });
+        },
+        /**
          * API view set for user enrollments
          * @param {number} id A unique integer value identifying this course run enrollment.
          * @param {CourseRunEnrollmentRequest} CourseRunEnrollmentRequest
@@ -5895,6 +5970,22 @@ export const EnrollmentsApiFp = function (configuration) {
                 return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
             });
         },
+        /**
+         * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+         * @param {boolean} [exclude_b2b] Exclude B2B enrollments (enrollments linked to course runs with B2B contracts)
+         * @param {number} [org_id] Filter by B2B organization ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsListV3(exclude_b2b, org_id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.userEnrollmentsListV3(exclude_b2b, org_id, options);
+                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const operationBasePath = (_c = (_b = operationServerMap['EnrollmentsApi.userEnrollmentsListV3']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            });
+        },
     };
 };
 /**
@@ -5948,6 +6039,15 @@ export const EnrollmentsApiFactory = function (configuration, basePath, axios) {
             return localVarFp.enrollmentsPartialUpdate(requestParameters.id, requestParameters.PatchedUpdateCourseRunEnrollmentRequest, options).then((request) => request(axios, basePath));
         },
         /**
+         * API view set for user enrollments - v3
+         * @param {EnrollmentsApiEnrollmentsRetrieveRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        enrollmentsRetrieve(requestParameters, options) {
+            return localVarFp.enrollmentsRetrieve(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * API view set for user enrollments
          * @param {EnrollmentsApiEnrollmentsUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -5982,6 +6082,15 @@ export const EnrollmentsApiFactory = function (configuration, basePath, axios) {
          */
         userEnrollmentsListV2(requestParameters = {}, options) {
             return localVarFp.userEnrollmentsListV2(requestParameters.exclude_b2b, requestParameters.org_id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+         * @param {EnrollmentsApiUserEnrollmentsListV3Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsListV3(requestParameters = {}, options) {
+            return localVarFp.userEnrollmentsListV3(requestParameters.exclude_b2b, requestParameters.org_id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -6041,6 +6150,16 @@ export class EnrollmentsApi extends BaseAPI {
         return EnrollmentsApiFp(this.configuration).enrollmentsPartialUpdate(requestParameters.id, requestParameters.PatchedUpdateCourseRunEnrollmentRequest, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * API view set for user enrollments - v3
+     * @param {EnrollmentsApiEnrollmentsRetrieveRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    enrollmentsRetrieve(requestParameters, options) {
+        return EnrollmentsApiFp(this.configuration).enrollmentsRetrieve(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * API view set for user enrollments
      * @param {EnrollmentsApiEnrollmentsUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -6079,6 +6198,16 @@ export class EnrollmentsApi extends BaseAPI {
      */
     userEnrollmentsListV2(requestParameters = {}, options) {
         return EnrollmentsApiFp(this.configuration).userEnrollmentsListV2(requestParameters.exclude_b2b, requestParameters.org_id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * List user enrollments with B2B organization and contract information - API v3. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
+     * @param {EnrollmentsApiUserEnrollmentsListV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    userEnrollmentsListV3(requestParameters = {}, options) {
+        return EnrollmentsApiFp(this.configuration).userEnrollmentsListV3(requestParameters.exclude_b2b, requestParameters.org_id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 /**
@@ -8190,7 +8319,7 @@ export const ProgramsApiAxiosParamCreator = function (configuration) {
         }),
         /**
          * API view set for Programs - v2
-         * @param {number} id A unique integer value identifying this program.
+         * @param {string} id A unique integer value (pk) or readable_id string identifying this program.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8283,7 +8412,7 @@ export const ProgramsApiFp = function (configuration) {
         },
         /**
          * API view set for Programs - v2
-         * @param {number} id A unique integer value identifying this program.
+         * @param {string} id A unique integer value (pk) or readable_id string identifying this program.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
