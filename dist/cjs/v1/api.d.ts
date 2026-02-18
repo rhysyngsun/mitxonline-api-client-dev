@@ -978,12 +978,6 @@ export interface CourseRunCertificate {
 export interface CourseRunEnrollment {
     /**
      *
-     * @type {V1CourseRunWithCourse}
-     * @memberof CourseRunEnrollment
-     */
-    'run': V1CourseRunWithCourse;
-    /**
-     *
      * @type {number}
      * @memberof CourseRunEnrollment
      */
@@ -1008,16 +1002,22 @@ export interface CourseRunEnrollment {
     'enrollment_mode': EnrollmentModeEnum;
     /**
      *
+     * @type {Array<CourseRunGrade>}
+     * @memberof CourseRunEnrollment
+     */
+    'grades': Array<CourseRunGrade>;
+    /**
+     *
      * @type {boolean}
      * @memberof CourseRunEnrollment
      */
     'approved_flexible_price_exists': boolean;
     /**
      *
-     * @type {Array<CourseRunGrade>}
+     * @type {V1CourseRunWithCourse}
      * @memberof CourseRunEnrollment
      */
-    'grades': Array<CourseRunGrade>;
+    'run': V1CourseRunWithCourse;
 }
 /**
  * CourseRunEnrollment model serializer
@@ -1046,12 +1046,6 @@ export interface CourseRunEnrollmentRequest {
 export interface CourseRunEnrollmentRequestV2 {
     /**
      *
-     * @type {V2CourseRunWithCourse}
-     * @memberof CourseRunEnrollmentRequestV2
-     */
-    'run': V2CourseRunWithCourse;
-    /**
-     *
      * @type {number}
      * @memberof CourseRunEnrollmentRequestV2
      */
@@ -1076,16 +1070,22 @@ export interface CourseRunEnrollmentRequestV2 {
     'enrollment_mode': EnrollmentModeEnum;
     /**
      *
+     * @type {Array<CourseRunGrade>}
+     * @memberof CourseRunEnrollmentRequestV2
+     */
+    'grades': Array<CourseRunGrade>;
+    /**
+     *
      * @type {boolean}
      * @memberof CourseRunEnrollmentRequestV2
      */
     'approved_flexible_price_exists': boolean;
     /**
      *
-     * @type {Array<CourseRunGrade>}
+     * @type {V2CourseRunWithCourse}
      * @memberof CourseRunEnrollmentRequestV2
      */
-    'grades': Array<CourseRunGrade>;
+    'run': V2CourseRunWithCourse;
     /**
      *
      * @type {number}
@@ -1132,6 +1132,30 @@ export interface CourseRunEnrollmentV3 {
     'id': number;
     /**
      *
+     * @type {boolean}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'edx_emails_subscription'?: boolean;
+    /**
+     *
+     * @type {V3CourseRunCertificate}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'certificate': V3CourseRunCertificate | null;
+    /**
+     *
+     * @type {EnrollmentModeEnum}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'enrollment_mode': EnrollmentModeEnum;
+    /**
+     *
+     * @type {Array<CourseRunGrade>}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'grades': Array<CourseRunGrade>;
+    /**
+     *
      * @type {CourseRunWithCourseV3}
      * @memberof CourseRunEnrollmentV3
      */
@@ -1148,24 +1172,25 @@ export interface CourseRunEnrollmentV3 {
      * @memberof CourseRunEnrollmentV3
      */
     'b2b_contract_id': number | null;
+}
+/**
+ * CourseRunEnrollment model serializer
+ * @export
+ * @interface CourseRunEnrollmentV3Request
+ */
+export interface CourseRunEnrollmentV3Request {
     /**
      *
-     * @type {EnrollmentModeEnum}
-     * @memberof CourseRunEnrollmentV3
+     * @type {boolean}
+     * @memberof CourseRunEnrollmentV3Request
      */
-    'enrollment_mode': EnrollmentModeEnum;
+    'edx_emails_subscription'?: boolean;
     /**
      *
-     * @type {V3CourseRunCertificate}
-     * @memberof CourseRunEnrollmentV3
+     * @type {number}
+     * @memberof CourseRunEnrollmentV3Request
      */
-    'certificate': V3CourseRunCertificate | null;
-    /**
-     *
-     * @type {Array<CourseRunGrade>}
-     * @memberof CourseRunEnrollmentV3
-     */
-    'grades': Array<CourseRunGrade>;
+    'run_id': number;
 }
 /**
  * CourseRunGrade serializer
@@ -1459,6 +1484,85 @@ export interface CourseRunWithCourseV3 {
     'course': CourseV3;
 }
 /**
+ * CourseRun serializer
+ * @export
+ * @interface CourseRunWithCourseV3Request
+ */
+export interface CourseRunWithCourseV3Request {
+    /**
+     * The title of the course. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'title': string;
+    /**
+     * The day the course begins. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'start_date'?: string | null;
+    /**
+     * The last day the course is active. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'end_date'?: string | null;
+    /**
+     * The first day students can enroll. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'enrollment_start'?: string | null;
+    /**
+     * The last day students can enroll. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'enrollment_end'?: string | null;
+    /**
+     * The date beyond which the learner should not see link to this course run on their dashboard.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'expiration_date'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'courseware_id': string;
+    /**
+     * The day certificates should be available to users. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'certificate_available_date'?: string | null;
+    /**
+     * The date beyond which the learner can not enroll in paid course mode.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'upgrade_deadline'?: string | null;
+    /**
+     *
+     * @type {boolean}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'is_self_paced'?: boolean;
+    /**
+     * A string that identifies the set of runs that this run belongs to (example: \'R2\')
+     * @type {string}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'run_tag': string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof CourseRunWithCourseV3Request
+     */
+    'live'?: boolean;
+}
+/**
  * Course serializer
  * @export
  * @interface CourseV3
@@ -1488,6 +1592,25 @@ export interface CourseV3 {
      * @memberof CourseV3
      */
     'type': string;
+}
+/**
+ * Course serializer
+ * @export
+ * @interface CourseV3Request
+ */
+export interface CourseV3Request {
+    /**
+     *
+     * @type {string}
+     * @memberof CourseV3Request
+     */
+    'title': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseV3Request
+     */
+    'readable_id': string;
 }
 /**
  * Course model serializer - also serializes child course runs
@@ -10792,12 +10915,26 @@ export declare const EnrollmentsApiAxiosParamCreator: (configuration?: Configura
      */
     userEnrollmentsCreateV2: (CourseRunEnrollmentRequestV2Request: CourseRunEnrollmentRequestV2Request, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Create a new user enrollment - API v3
+     * @param {CourseRunEnrollmentV3Request} CourseRunEnrollmentV3Request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsCreateV3: (CourseRunEnrollmentV3Request: CourseRunEnrollmentV3Request, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Unenroll from a course - API v2
      * @param {number} id A unique integer value identifying this course run enrollment.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     userEnrollmentsDestroyV2: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Unenroll from a course - API v3
+     * @param {number} id A unique integer value identifying this course run enrollment.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsDestroyV3: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * List user enrollments with B2B organization and contract information - API v2. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
      * @param {boolean} [exclude_b2b] Exclude B2B enrollments (enrollments linked to course runs with B2B contracts)
@@ -10877,12 +11014,26 @@ export declare const EnrollmentsApiFp: (configuration?: Configuration) => {
      */
     userEnrollmentsCreateV2(CourseRunEnrollmentRequestV2Request: CourseRunEnrollmentRequestV2Request, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseRunEnrollmentRequestV2>>;
     /**
+     * Create a new user enrollment - API v3
+     * @param {CourseRunEnrollmentV3Request} CourseRunEnrollmentV3Request
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsCreateV3(CourseRunEnrollmentV3Request: CourseRunEnrollmentV3Request, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseRunEnrollmentV3>>;
+    /**
      * Unenroll from a course - API v2
      * @param {number} id A unique integer value identifying this course run enrollment.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     userEnrollmentsDestroyV2(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Unenroll from a course - API v3
+     * @param {number} id A unique integer value identifying this course run enrollment.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsDestroyV3(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * List user enrollments with B2B organization and contract information - API v2. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
      * @param {boolean} [exclude_b2b] Exclude B2B enrollments (enrollments linked to course runs with B2B contracts)
@@ -10960,12 +11111,26 @@ export declare const EnrollmentsApiFactory: (configuration?: Configuration, base
      */
     userEnrollmentsCreateV2(requestParameters: EnrollmentsApiUserEnrollmentsCreateV2Request, options?: RawAxiosRequestConfig): AxiosPromise<CourseRunEnrollmentRequestV2>;
     /**
+     * Create a new user enrollment - API v3
+     * @param {EnrollmentsApiUserEnrollmentsCreateV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsCreateV3(requestParameters: EnrollmentsApiUserEnrollmentsCreateV3Request, options?: RawAxiosRequestConfig): AxiosPromise<CourseRunEnrollmentV3>;
+    /**
      * Unenroll from a course - API v2
      * @param {EnrollmentsApiUserEnrollmentsDestroyV2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     userEnrollmentsDestroyV2(requestParameters: EnrollmentsApiUserEnrollmentsDestroyV2Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Unenroll from a course - API v3
+     * @param {EnrollmentsApiUserEnrollmentsDestroyV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    userEnrollmentsDestroyV3(requestParameters: EnrollmentsApiUserEnrollmentsDestroyV3Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * List user enrollments with B2B organization and contract information - API v2. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
      * @param {EnrollmentsApiUserEnrollmentsListV2Request} requestParameters Request parameters.
@@ -11072,6 +11237,19 @@ export interface EnrollmentsApiUserEnrollmentsCreateV2Request {
     readonly CourseRunEnrollmentRequestV2Request: CourseRunEnrollmentRequestV2Request;
 }
 /**
+ * Request parameters for userEnrollmentsCreateV3 operation in EnrollmentsApi.
+ * @export
+ * @interface EnrollmentsApiUserEnrollmentsCreateV3Request
+ */
+export interface EnrollmentsApiUserEnrollmentsCreateV3Request {
+    /**
+     *
+     * @type {CourseRunEnrollmentV3Request}
+     * @memberof EnrollmentsApiUserEnrollmentsCreateV3
+     */
+    readonly CourseRunEnrollmentV3Request: CourseRunEnrollmentV3Request;
+}
+/**
  * Request parameters for userEnrollmentsDestroyV2 operation in EnrollmentsApi.
  * @export
  * @interface EnrollmentsApiUserEnrollmentsDestroyV2Request
@@ -11081,6 +11259,19 @@ export interface EnrollmentsApiUserEnrollmentsDestroyV2Request {
      * A unique integer value identifying this course run enrollment.
      * @type {number}
      * @memberof EnrollmentsApiUserEnrollmentsDestroyV2
+     */
+    readonly id: number;
+}
+/**
+ * Request parameters for userEnrollmentsDestroyV3 operation in EnrollmentsApi.
+ * @export
+ * @interface EnrollmentsApiUserEnrollmentsDestroyV3Request
+ */
+export interface EnrollmentsApiUserEnrollmentsDestroyV3Request {
+    /**
+     * A unique integer value identifying this course run enrollment.
+     * @type {number}
+     * @memberof EnrollmentsApiUserEnrollmentsDestroyV3
      */
     readonly id: number;
 }
@@ -11192,6 +11383,14 @@ export declare class EnrollmentsApi extends BaseAPI {
      */
     userEnrollmentsCreateV2(requestParameters: EnrollmentsApiUserEnrollmentsCreateV2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseRunEnrollmentRequestV2, any, {}>>;
     /**
+     * Create a new user enrollment - API v3
+     * @param {EnrollmentsApiUserEnrollmentsCreateV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    userEnrollmentsCreateV3(requestParameters: EnrollmentsApiUserEnrollmentsCreateV3Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseRunEnrollmentV3, any, {}>>;
+    /**
      * Unenroll from a course - API v2
      * @param {EnrollmentsApiUserEnrollmentsDestroyV2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -11199,6 +11398,14 @@ export declare class EnrollmentsApi extends BaseAPI {
      * @memberof EnrollmentsApi
      */
     userEnrollmentsDestroyV2(requestParameters: EnrollmentsApiUserEnrollmentsDestroyV2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     * Unenroll from a course - API v3
+     * @param {EnrollmentsApiUserEnrollmentsDestroyV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    userEnrollmentsDestroyV3(requestParameters: EnrollmentsApiUserEnrollmentsDestroyV3Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * List user enrollments with B2B organization and contract information - API v2. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
      * @param {EnrollmentsApiUserEnrollmentsListV2Request} requestParameters Request parameters.

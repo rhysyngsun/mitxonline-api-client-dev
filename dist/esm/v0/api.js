@@ -5719,6 +5719,35 @@ export const EnrollmentsApiAxiosParamCreator = function (configuration) {
             };
         }),
         /**
+         * Create a new user enrollment - API v3
+         * @param {CourseRunEnrollmentV3Request} CourseRunEnrollmentV3Request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsCreateV3: (CourseRunEnrollmentV3Request_1, ...args_1) => __awaiter(this, [CourseRunEnrollmentV3Request_1, ...args_1], void 0, function* (CourseRunEnrollmentV3Request, options = {}) {
+            // verify required parameter 'CourseRunEnrollmentV3Request' is not null or undefined
+            assertParamExists('userEnrollmentsCreateV3', 'CourseRunEnrollmentV3Request', CourseRunEnrollmentV3Request);
+            const localVarPath = `/api/v3/enrollments/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'POST' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            localVarRequestOptions.data = serializeDataIfNeeded(CourseRunEnrollmentV3Request, localVarRequestOptions, configuration);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
          * Unenroll from a course - API v2
          * @param {number} id A unique integer value identifying this course run enrollment.
          * @param {*} [options] Override http request option.
@@ -5728,6 +5757,34 @@ export const EnrollmentsApiAxiosParamCreator = function (configuration) {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('userEnrollmentsDestroyV2', 'id', id);
             const localVarPath = `/api/v2/enrollments/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'DELETE' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Unenroll from a course - API v3
+         * @param {number} id A unique integer value identifying this course run enrollment.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsDestroyV3: (id_1, ...args_1) => __awaiter(this, [id_1, ...args_1], void 0, function* (id, options = {}) {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('userEnrollmentsDestroyV3', 'id', id);
+            const localVarPath = `/api/v3/enrollments/{id}/`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5940,6 +5997,21 @@ export const EnrollmentsApiFp = function (configuration) {
             });
         },
         /**
+         * Create a new user enrollment - API v3
+         * @param {CourseRunEnrollmentV3Request} CourseRunEnrollmentV3Request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsCreateV3(CourseRunEnrollmentV3Request, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.userEnrollmentsCreateV3(CourseRunEnrollmentV3Request, options);
+                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const operationBasePath = (_c = (_b = operationServerMap['EnrollmentsApi.userEnrollmentsCreateV3']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            });
+        },
+        /**
          * Unenroll from a course - API v2
          * @param {number} id A unique integer value identifying this course run enrollment.
          * @param {*} [options] Override http request option.
@@ -5951,6 +6023,21 @@ export const EnrollmentsApiFp = function (configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.userEnrollmentsDestroyV2(id, options);
                 const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const operationBasePath = (_c = (_b = operationServerMap['EnrollmentsApi.userEnrollmentsDestroyV2']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            });
+        },
+        /**
+         * Unenroll from a course - API v3
+         * @param {number} id A unique integer value identifying this course run enrollment.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsDestroyV3(id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.userEnrollmentsDestroyV3(id, options);
+                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const operationBasePath = (_c = (_b = operationServerMap['EnrollmentsApi.userEnrollmentsDestroyV3']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
                 return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
             });
         },
@@ -6066,6 +6153,15 @@ export const EnrollmentsApiFactory = function (configuration, basePath, axios) {
             return localVarFp.userEnrollmentsCreateV2(requestParameters.CourseRunEnrollmentRequestV2Request, options).then((request) => request(axios, basePath));
         },
         /**
+         * Create a new user enrollment - API v3
+         * @param {EnrollmentsApiUserEnrollmentsCreateV3Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsCreateV3(requestParameters, options) {
+            return localVarFp.userEnrollmentsCreateV3(requestParameters.CourseRunEnrollmentV3Request, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Unenroll from a course - API v2
          * @param {EnrollmentsApiUserEnrollmentsDestroyV2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -6073,6 +6169,15 @@ export const EnrollmentsApiFactory = function (configuration, basePath, axios) {
          */
         userEnrollmentsDestroyV2(requestParameters, options) {
             return localVarFp.userEnrollmentsDestroyV2(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Unenroll from a course - API v3
+         * @param {EnrollmentsApiUserEnrollmentsDestroyV3Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userEnrollmentsDestroyV3(requestParameters, options) {
+            return localVarFp.userEnrollmentsDestroyV3(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * List user enrollments with B2B organization and contract information - API v2. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
@@ -6180,6 +6285,16 @@ export class EnrollmentsApi extends BaseAPI {
         return EnrollmentsApiFp(this.configuration).userEnrollmentsCreateV2(requestParameters.CourseRunEnrollmentRequestV2Request, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * Create a new user enrollment - API v3
+     * @param {EnrollmentsApiUserEnrollmentsCreateV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    userEnrollmentsCreateV3(requestParameters, options) {
+        return EnrollmentsApiFp(this.configuration).userEnrollmentsCreateV3(requestParameters.CourseRunEnrollmentV3Request, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * Unenroll from a course - API v2
      * @param {EnrollmentsApiUserEnrollmentsDestroyV2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -6188,6 +6303,16 @@ export class EnrollmentsApi extends BaseAPI {
      */
     userEnrollmentsDestroyV2(requestParameters, options) {
         return EnrollmentsApiFp(this.configuration).userEnrollmentsDestroyV2(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Unenroll from a course - API v3
+     * @param {EnrollmentsApiUserEnrollmentsDestroyV3Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EnrollmentsApi
+     */
+    userEnrollmentsDestroyV3(requestParameters, options) {
+        return EnrollmentsApiFp(this.configuration).userEnrollmentsDestroyV3(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * List user enrollments with B2B organization and contract information - API v2. Use ?exclude_b2b=true to filter out enrollments linked to course runs with B2B contracts. Use ?org_id=<id> to filter enrollments by specific B2B organization.
