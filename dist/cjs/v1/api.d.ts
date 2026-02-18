@@ -1132,16 +1132,10 @@ export interface CourseRunEnrollmentV3 {
     'id': number;
     /**
      *
-     * @type {number}
+     * @type {CourseRunWithCourseV3}
      * @memberof CourseRunEnrollmentV3
      */
-    'run_id': number;
-    /**
-     *
-     * @type {number}
-     * @memberof CourseRunEnrollmentV3
-     */
-    'course_id': number;
+    'run': CourseRunWithCourseV3;
     /**
      *
      * @type {number}
@@ -1166,6 +1160,12 @@ export interface CourseRunEnrollmentV3 {
      * @memberof CourseRunEnrollmentV3
      */
     'certificate': V3CourseRunCertificate | null;
+    /**
+     *
+     * @type {Array<CourseRunGrade>}
+     * @memberof CourseRunEnrollmentV3
+     */
+    'grades': Array<CourseRunGrade>;
 }
 /**
  * CourseRunGrade serializer
@@ -1336,6 +1336,158 @@ export interface CourseRunV2 {
      * @memberof CourseRunV2
      */
     'b2b_contract'?: number | null;
+}
+/**
+ * CourseRun serializer
+ * @export
+ * @interface CourseRunWithCourseV3
+ */
+export interface CourseRunWithCourseV3 {
+    /**
+     * The title of the course. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'title': string;
+    /**
+     * The day the course begins. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'start_date'?: string | null;
+    /**
+     * The last day the course is active. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'end_date'?: string | null;
+    /**
+     * The first day students can enroll. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'enrollment_start'?: string | null;
+    /**
+     * The last day students can enroll. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'enrollment_end'?: string | null;
+    /**
+     * The date beyond which the learner should not see link to this course run on their dashboard.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'expiration_date'?: string | null;
+    /**
+     * Get the courseware URL
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'courseware_url': string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'courseware_id': string;
+    /**
+     * The day certificates should be available to users. This value is synced automatically with edX studio.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'certificate_available_date'?: string | null;
+    /**
+     * The date beyond which the learner can not enroll in paid course mode.
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'upgrade_deadline'?: string | null;
+    /**
+     * Check if the course run is upgradable
+     * @type {boolean}
+     * @memberof CourseRunWithCourseV3
+     */
+    'is_upgradable': boolean;
+    /**
+     * Check if the course run is enrollable
+     * @type {boolean}
+     * @memberof CourseRunWithCourseV3
+     */
+    'is_enrollable': boolean;
+    /**
+     * Check if the course run is archived
+     * @type {boolean}
+     * @memberof CourseRunWithCourseV3
+     */
+    'is_archived': boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof CourseRunWithCourseV3
+     */
+    'is_self_paced'?: boolean;
+    /**
+     * A string that identifies the set of runs that this run belongs to (example: \'R2\')
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'run_tag': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CourseRunWithCourseV3
+     */
+    'id': number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof CourseRunWithCourseV3
+     */
+    'live'?: boolean;
+    /**
+     * Get the course number
+     * @type {string}
+     * @memberof CourseRunWithCourseV3
+     */
+    'course_number': string;
+    /**
+     *
+     * @type {CourseV3}
+     * @memberof CourseRunWithCourseV3
+     */
+    'course': CourseV3;
+}
+/**
+ * Course serializer
+ * @export
+ * @interface CourseV3
+ */
+export interface CourseV3 {
+    /**
+     *
+     * @type {number}
+     * @memberof CourseV3
+     */
+    'id': number;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseV3
+     */
+    'title': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseV3
+     */
+    'readable_id': string;
+    /**
+     * Returns the type of object this is serializing.
+     * @type {string}
+     * @memberof CourseV3
+     */
+    'type': string;
 }
 /**
  * Course model serializer - also serializes child course runs
