@@ -61,6 +61,37 @@ export interface BaseCourse {
     'type': string;
 }
 /**
+ * Simple serializer for Product without related purchasable objects
+ * @export
+ * @interface BaseProduct
+ */
+export interface BaseProduct {
+    /**
+     *
+     * @type {number}
+     * @memberof BaseProduct
+     */
+    'id': number;
+    /**
+     *
+     * @type {string}
+     * @memberof BaseProduct
+     */
+    'price': string;
+    /**
+     *
+     * @type {string}
+     * @memberof BaseProduct
+     */
+    'description': string;
+    /**
+     * Controls visibility of the product in the app.
+     * @type {boolean}
+     * @memberof BaseProduct
+     */
+    'is_active'?: boolean;
+}
+/**
  * Basic program model serializer
  * @export
  * @interface BaseProgram
@@ -1345,6 +1376,12 @@ export interface CourseRunV2 {
     'course_number': string;
     /**
      *
+     * @type {Array<EnrollmentMode>}
+     * @memberof CourseRunV2
+     */
+    'enrollment_modes': Array<EnrollmentMode>;
+    /**
+     *
      * @type {Array<ProductFlexibilePrice>}
      * @memberof CourseRunV2
      */
@@ -2122,6 +2159,31 @@ export declare const DiscountTypeEnum: {
 };
 export type DiscountTypeEnum = typeof DiscountTypeEnum[keyof typeof DiscountTypeEnum];
 /**
+ * Enrollment mode serializer.
+ * @export
+ * @interface EnrollmentMode
+ */
+export interface EnrollmentMode {
+    /**
+     *
+     * @type {string}
+     * @memberof EnrollmentMode
+     */
+    'mode_slug'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof EnrollmentMode
+     */
+    'mode_display_name'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof EnrollmentMode
+     */
+    'requires_payment'?: boolean;
+}
+/**
  * * `audit` - audit * `verified` - verified
  * @export
  * @enum {string}
@@ -2137,6 +2199,31 @@ export declare const EnrollmentModeEnum: {
     readonly Verified: "verified";
 };
 export type EnrollmentModeEnum = typeof EnrollmentModeEnum[keyof typeof EnrollmentModeEnum];
+/**
+ * Enrollment mode serializer.
+ * @export
+ * @interface EnrollmentModeRequest
+ */
+export interface EnrollmentModeRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof EnrollmentModeRequest
+     */
+    'mode_slug'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof EnrollmentModeRequest
+     */
+    'mode_display_name'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof EnrollmentModeRequest
+     */
+    'requires_payment'?: boolean;
+}
 /**
  * * `enroll-blocked` - enroll-blocked * `enroll-duplicated` - enroll-duplicated * `course-non-upgradable` - course-non-upgradable * `discount-invalid` - discount-invalid * `b2b-error-missing-enrollment-code` - b2b-error-missing-enrollment-code * `b2b-invalid-basket` - b2b-invalid-basket * `basket-empty` - basket-empty
  * @export
@@ -3692,33 +3779,33 @@ export interface PaginatedV2ProgramCollectionList {
 /**
  *
  * @export
- * @interface PaginatedV2ProgramList
+ * @interface PaginatedV2ProgramDetailList
  */
-export interface PaginatedV2ProgramList {
+export interface PaginatedV2ProgramDetailList {
     /**
      *
      * @type {number}
-     * @memberof PaginatedV2ProgramList
+     * @memberof PaginatedV2ProgramDetailList
      */
     'count': number;
     /**
      *
      * @type {string}
-     * @memberof PaginatedV2ProgramList
+     * @memberof PaginatedV2ProgramDetailList
      */
     'next'?: string | null;
     /**
      *
      * @type {string}
-     * @memberof PaginatedV2ProgramList
+     * @memberof PaginatedV2ProgramDetailList
      */
     'previous'?: string | null;
     /**
      *
-     * @type {Array<V2Program>}
-     * @memberof PaginatedV2ProgramList
+     * @type {Array<V2ProgramDetail>}
+     * @memberof PaginatedV2ProgramDetailList
      */
-    'results': Array<V2Program>;
+    'results': Array<V2ProgramDetail>;
 }
 /**
  *
@@ -4224,7 +4311,7 @@ export interface ProductFlexiblePrice {
  * @type ProductPurchasableObject
  * @export
  */
-export type ProductPurchasableObject = ProductPurchasableObjectOneOf | ProductPurchasableObjectOneOf1;
+export type ProductPurchasableObject = ProductPurchasableObjectOneOf | ProductPurchasableObjectOneOf1 | ProductPurchasableObjectOneOf2;
 /**
  *
  * @export
@@ -4345,6 +4432,37 @@ export interface ProductPurchasableObjectOneOf1Course {
      *
      * @type {object}
      * @memberof ProductPurchasableObjectOneOf1Course
+     */
+    'page'?: object;
+}
+/**
+ *
+ * @export
+ * @interface ProductPurchasableObjectOneOf2
+ */
+export interface ProductPurchasableObjectOneOf2 {
+    /**
+     *
+     * @type {number}
+     * @memberof ProductPurchasableObjectOneOf2
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ProductPurchasableObjectOneOf2
+     */
+    'title'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ProductPurchasableObjectOneOf2
+     */
+    'readable_id'?: string;
+    /**
+     *
+     * @type {object}
+     * @memberof ProductPurchasableObjectOneOf2
      */
     'page'?: object;
 }
@@ -5639,6 +5757,12 @@ export interface V1BaseCourseRun {
     'course_number': string;
     /**
      *
+     * @type {Array<EnrollmentMode>}
+     * @memberof V1BaseCourseRun
+     */
+    'enrollment_modes': Array<EnrollmentMode>;
+    /**
+     *
      * @type {Array<ProductFlexibilePrice>}
      * @memberof V1BaseCourseRun
      */
@@ -5764,6 +5888,12 @@ export interface V1CourseRunWithCourse {
      * @memberof V1CourseRunWithCourse
      */
     'course_number': string;
+    /**
+     *
+     * @type {Array<EnrollmentMode>}
+     * @memberof V1CourseRunWithCourse
+     */
+    'enrollment_modes': Array<EnrollmentMode>;
     /**
      * List of products associated with this course run
      * @type {Array<ProductFlexibilePrice>}
@@ -5983,6 +6113,12 @@ export interface V1Program {
      * @memberof V1Program
      */
     'live'?: boolean;
+    /**
+     *
+     * @type {Array<EnrollmentMode>}
+     * @memberof V1Program
+     */
+    'enrollment_modes': Array<EnrollmentMode>;
 }
 /**
  * ProgramCertificate model serializer
@@ -6426,6 +6562,12 @@ export interface V2CourseRunWithCourse {
     'course_number': string;
     /**
      *
+     * @type {Array<EnrollmentMode>}
+     * @memberof V2CourseRunWithCourse
+     */
+    'enrollment_modes': Array<EnrollmentMode>;
+    /**
+     *
      * @type {Array<ProductFlexibilePrice>}
      * @memberof V2CourseRunWithCourse
      */
@@ -6702,6 +6844,12 @@ export interface V2Program {
      * @memberof V2Program
      */
     'max_weekly_hours': string | null;
+    /**
+     *
+     * @type {Array<EnrollmentMode>}
+     * @memberof V2Program
+     */
+    'enrollment_modes': Array<EnrollmentMode>;
 }
 /**
  * Serializer for course certificates.
@@ -6819,6 +6967,187 @@ export interface V2ProgramCollectionProgramsInner {
      * @memberof V2ProgramCollectionProgramsInner
      */
     'order'?: number;
+}
+/**
+ * Extended Program serializer that includes products. Used by the programs API.
+ * @export
+ * @interface V2ProgramDetail
+ */
+export interface V2ProgramDetail {
+    /**
+     *
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'title': string;
+    /**
+     *
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'readable_id': string;
+    /**
+     *
+     * @type {number}
+     * @memberof V2ProgramDetail
+     */
+    'id': number;
+    /**
+     *
+     * @type {Array<number>}
+     * @memberof V2ProgramDetail
+     */
+    'courses': Array<number>;
+    /**
+     *
+     * @type {Array<number>}
+     * @memberof V2ProgramDetail
+     */
+    'collections': Array<number>;
+    /**
+     *
+     * @type {V2ProgramRequirements}
+     * @memberof V2ProgramDetail
+     */
+    'requirements': V2ProgramRequirements;
+    /**
+     *
+     * @type {Array<V2ProgramRequirement>}
+     * @memberof V2ProgramDetail
+     */
+    'req_tree': Array<V2ProgramRequirement>;
+    /**
+     *
+     * @type {ProgramPage}
+     * @memberof V2ProgramDetail
+     */
+    'page': ProgramPage;
+    /**
+     *
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'program_type'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'certificate_type': string;
+    /**
+     *
+     * @type {Array<Department>}
+     * @memberof V2ProgramDetail
+     */
+    'departments': Array<Department>;
+    /**
+     *
+     * @type {boolean}
+     * @memberof V2ProgramDetail
+     */
+    'live'?: boolean;
+    /**
+     *
+     * @type {Array<V2ProgramTopicsInner>}
+     * @memberof V2ProgramDetail
+     */
+    'topics': Array<V2ProgramTopicsInner>;
+    /**
+     *
+     * @type {AvailabilityEnum}
+     * @memberof V2ProgramDetail
+     */
+    'availability'?: AvailabilityEnum;
+    /**
+     * Get the start date of the program by finding the first available run.
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'start_date': string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'end_date'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'enrollment_start'?: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'enrollment_end'?: string | null;
+    /**
+     * Check if the prerequisites field is populated in the program page CMS.
+     * @type {boolean}
+     * @memberof V2ProgramDetail
+     */
+    'required_prerequisites': boolean;
+    /**
+     * Get the length/duration field from the program page CMS.
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'duration': string | null;
+    /**
+     * Get the min weeks of the program from the CMS page.
+     * @type {number}
+     * @memberof V2ProgramDetail
+     */
+    'min_weeks': number | null;
+    /**
+     * Get the max weeks of the program from the CMS page.
+     * @type {number}
+     * @memberof V2ProgramDetail
+     */
+    'max_weeks': number | null;
+    /**
+     * Get the min price of the product from the CMS page.
+     * @type {number}
+     * @memberof V2ProgramDetail
+     */
+    'min_price': number | null;
+    /**
+     * Get the max price of the product from the CMS page.
+     * @type {number}
+     * @memberof V2ProgramDetail
+     */
+    'max_price': number | null;
+    /**
+     * Get the effort/time_commitment field from the program page CMS.
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'time_commitment': string | null;
+    /**
+     * Get the min weekly hours of the course from the course page CMS.
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'min_weekly_hours': string | null;
+    /**
+     * Get the max weekly hours of the course from the course page CMS.
+     * @type {string}
+     * @memberof V2ProgramDetail
+     */
+    'max_weekly_hours': string | null;
+    /**
+     *
+     * @type {Array<EnrollmentMode>}
+     * @memberof V2ProgramDetail
+     */
+    'enrollment_modes': Array<EnrollmentMode>;
+    /**
+     *
+     * @type {Array<BaseProduct>}
+     * @memberof V2ProgramDetail
+     */
+    'products': Array<BaseProduct>;
 }
 /**
  * Serializer for a ProgramRequirement
@@ -7053,6 +7382,19 @@ export interface V3ProgramCertificate {
     'link': string;
 }
 /**
+ * Serializer for creating a program enrollment. Accepts a program_id and validates it corresponds to a live program.
+ * @export
+ * @interface V3ProgramEnrollmentRequestRequest
+ */
+export interface V3ProgramEnrollmentRequestRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof V3ProgramEnrollmentRequestRequest
+     */
+    'program_id': number;
+}
+/**
  * Program Model Serializer v2
  * @export
  * @interface V3SimpleProgram
@@ -7107,6 +7449,12 @@ export interface V3UserProgramEnrollment {
      * @memberof V3UserProgramEnrollment
      */
     'certificate': V3ProgramCertificate | null;
+    /**
+     *
+     * @type {string}
+     * @memberof V3UserProgramEnrollment
+     */
+    'enrollment_mode'?: string | null;
 }
 /**
  * * `None` - ---- * `2` - Less than 2 years * `5` - 2-5 years * `10` - 6 - 10 years * `15` - 11 - 15 years * `20` - 16 - 20 years * `21` - More than 20 years * `0` - Prefer not to say
@@ -7352,7 +7700,7 @@ export declare class ApiApi extends BaseAPI {
  */
 export declare const B2bApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
      * @param {string} enrollment_code
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7398,7 +7746,7 @@ export declare const B2bApiAxiosParamCreator: (configuration?: Configuration) =>
  */
 export declare const B2bApiFp: (configuration?: Configuration) => {
     /**
-     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
      * @param {string} enrollment_code
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7444,7 +7792,7 @@ export declare const B2bApiFp: (configuration?: Configuration) => {
  */
 export declare const B2bApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
      * @param {B2bApiB2bAttachCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7544,7 +7892,7 @@ export interface B2bApiB2bOrganizationsRetrieveRequest {
  */
 export declare class B2bApi extends BaseAPI {
     /**
-     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
      * @param {B2bApiB2bAttachCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12487,7 +12835,7 @@ export declare const ProgramEnrollmentsApiAxiosParamCreator: (configuration?: Co
     programEnrollmentsRetrieve: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Unenroll the user from this program. This is simpler than the corresponding function for CourseRunEnrollments; edX doesn\'t really know what programs are so there\'s nothing to process there.
-     * @param {number} id Program enrollment ID
+     * @param {number} id Program ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -12500,11 +12848,25 @@ export declare const ProgramEnrollmentsApiAxiosParamCreator: (configuration?: Co
     v2ProgramEnrollmentsList: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieve a specific program enrollment using v2 serializers.
-     * @param {number} id Program enrollment ID
+     * @param {number} id Program ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     v2ProgramEnrollmentsRetrieve: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+     * @param {V3ProgramEnrollmentRequestRequest} V3ProgramEnrollmentRequestRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    v3ProgramEnrollmentsCreate: (V3ProgramEnrollmentRequestRequest: V3ProgramEnrollmentRequestRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+     * @param {number} program_id Program ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    v3ProgramEnrollmentsDestroy: (program_id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * ViewSet for user program enrollments with v3 serializers.
      * @param {*} [options] Override http request option.
@@ -12546,7 +12908,7 @@ export declare const ProgramEnrollmentsApiFp: (configuration?: Configuration) =>
     programEnrollmentsRetrieve(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserProgramEnrollmentDetail>>;
     /**
      * Unenroll the user from this program. This is simpler than the corresponding function for CourseRunEnrollments; edX doesn\'t really know what programs are so there\'s nothing to process there.
-     * @param {number} id Program enrollment ID
+     * @param {number} id Program ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -12559,11 +12921,25 @@ export declare const ProgramEnrollmentsApiFp: (configuration?: Configuration) =>
     v2ProgramEnrollmentsList(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<V2UserProgramEnrollmentDetail>>>;
     /**
      * Retrieve a specific program enrollment using v2 serializers.
-     * @param {number} id Program enrollment ID
+     * @param {number} id Program ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     v2ProgramEnrollmentsRetrieve(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2UserProgramEnrollmentDetail>>;
+    /**
+     * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+     * @param {V3ProgramEnrollmentRequestRequest} V3ProgramEnrollmentRequestRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    v3ProgramEnrollmentsCreate(V3ProgramEnrollmentRequestRequest: V3ProgramEnrollmentRequestRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+     * @param {number} program_id Program ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    v3ProgramEnrollmentsDestroy(program_id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * ViewSet for user program enrollments with v3 serializers.
      * @param {*} [options] Override http request option.
@@ -12624,6 +13000,20 @@ export declare const ProgramEnrollmentsApiFactory: (configuration?: Configuratio
      */
     v2ProgramEnrollmentsRetrieve(requestParameters: ProgramEnrollmentsApiV2ProgramEnrollmentsRetrieveRequest, options?: RawAxiosRequestConfig): AxiosPromise<V2UserProgramEnrollmentDetail>;
     /**
+     * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+     * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    v3ProgramEnrollmentsCreate(requestParameters: ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+     * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    v3ProgramEnrollmentsDestroy(requestParameters: ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
      * ViewSet for user program enrollments with v3 serializers.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12670,7 +13060,7 @@ export interface ProgramEnrollmentsApiProgramEnrollmentsRetrieveRequest {
  */
 export interface ProgramEnrollmentsApiV2ProgramEnrollmentsDestroyRequest {
     /**
-     * Program enrollment ID
+     * Program ID
      * @type {number}
      * @memberof ProgramEnrollmentsApiV2ProgramEnrollmentsDestroy
      */
@@ -12683,11 +13073,37 @@ export interface ProgramEnrollmentsApiV2ProgramEnrollmentsDestroyRequest {
  */
 export interface ProgramEnrollmentsApiV2ProgramEnrollmentsRetrieveRequest {
     /**
-     * Program enrollment ID
+     * Program ID
      * @type {number}
      * @memberof ProgramEnrollmentsApiV2ProgramEnrollmentsRetrieve
      */
     readonly id: number;
+}
+/**
+ * Request parameters for v3ProgramEnrollmentsCreate operation in ProgramEnrollmentsApi.
+ * @export
+ * @interface ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest
+ */
+export interface ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest {
+    /**
+     *
+     * @type {V3ProgramEnrollmentRequestRequest}
+     * @memberof ProgramEnrollmentsApiV3ProgramEnrollmentsCreate
+     */
+    readonly V3ProgramEnrollmentRequestRequest: V3ProgramEnrollmentRequestRequest;
+}
+/**
+ * Request parameters for v3ProgramEnrollmentsDestroy operation in ProgramEnrollmentsApi.
+ * @export
+ * @interface ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest
+ */
+export interface ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest {
+    /**
+     * Program ID
+     * @type {number}
+     * @memberof ProgramEnrollmentsApiV3ProgramEnrollmentsDestroy
+     */
+    readonly program_id: number;
 }
 /**
  * Request parameters for v3ProgramEnrollmentsRetrieve operation in ProgramEnrollmentsApi.
@@ -12755,6 +13171,22 @@ export declare class ProgramEnrollmentsApi extends BaseAPI {
      * @memberof ProgramEnrollmentsApi
      */
     v2ProgramEnrollmentsRetrieve(requestParameters: ProgramEnrollmentsApiV2ProgramEnrollmentsRetrieveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<V2UserProgramEnrollmentDetail, any, {}>>;
+    /**
+     * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+     * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramEnrollmentsApi
+     */
+    v3ProgramEnrollmentsCreate(requestParameters: ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+     * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramEnrollmentsApi
+     */
+    v3ProgramEnrollmentsDestroy(requestParameters: ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * ViewSet for user program enrollments with v3 serializers.
      * @param {*} [options] Override http request option.
@@ -12845,7 +13277,7 @@ export declare const ProgramsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    programsListV2(contract_id?: number, id?: Array<number>, live?: boolean, org_id?: number, page?: number, page__live?: boolean, page_size?: number, readable_id?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedV2ProgramList>>;
+    programsListV2(contract_id?: number, id?: Array<number>, live?: boolean, org_id?: number, page?: number, page__live?: boolean, page_size?: number, readable_id?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedV2ProgramDetailList>>;
     /**
      * API view set for Programs - v1
      * @param {number} id A unique integer value identifying this program.
@@ -12859,7 +13291,7 @@ export declare const ProgramsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    programsRetrieveV2(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2Program>>;
+    programsRetrieveV2(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V2ProgramDetail>>;
 };
 /**
  * ProgramsApi - factory interface
@@ -12879,7 +13311,7 @@ export declare const ProgramsApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    programsListV2(requestParameters?: ProgramsApiProgramsListV2Request, options?: RawAxiosRequestConfig): AxiosPromise<PaginatedV2ProgramList>;
+    programsListV2(requestParameters?: ProgramsApiProgramsListV2Request, options?: RawAxiosRequestConfig): AxiosPromise<PaginatedV2ProgramDetailList>;
     /**
      * API view set for Programs - v1
      * @param {ProgramsApiProgramsRetrieveV1Request} requestParameters Request parameters.
@@ -12893,7 +13325,7 @@ export declare const ProgramsApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    programsRetrieveV2(requestParameters: ProgramsApiProgramsRetrieveV2Request, options?: RawAxiosRequestConfig): AxiosPromise<V2Program>;
+    programsRetrieveV2(requestParameters: ProgramsApiProgramsRetrieveV2Request, options?: RawAxiosRequestConfig): AxiosPromise<V2ProgramDetail>;
 };
 /**
  * Request parameters for programsListV1 operation in ProgramsApi.
@@ -13035,7 +13467,7 @@ export declare class ProgramsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProgramsApi
      */
-    programsListV2(requestParameters?: ProgramsApiProgramsListV2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PaginatedV2ProgramList, any, {}>>;
+    programsListV2(requestParameters?: ProgramsApiProgramsListV2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PaginatedV2ProgramDetailList, any, {}>>;
     /**
      * API view set for Programs - v1
      * @param {ProgramsApiProgramsRetrieveV1Request} requestParameters Request parameters.
@@ -13051,7 +13483,7 @@ export declare class ProgramsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProgramsApi
      */
-    programsRetrieveV2(requestParameters: ProgramsApiProgramsRetrieveV2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<V2Program, any, {}>>;
+    programsRetrieveV2(requestParameters: ProgramsApiProgramsRetrieveV2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<V2ProgramDetail, any, {}>>;
 }
 /**
  * UserSearchApi - axios parameter creator

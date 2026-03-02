@@ -735,7 +735,7 @@ export class ApiApi extends BaseAPI {
 export const B2bApiAxiosParamCreator = function (configuration) {
     return {
         /**
-         * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+         * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
          * @param {string} enrollment_code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -904,7 +904,7 @@ export const B2bApiFp = function (configuration) {
     const localVarAxiosParamCreator = B2bApiAxiosParamCreator(configuration);
     return {
         /**
-         * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+         * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
          * @param {string} enrollment_code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1001,7 +1001,7 @@ export const B2bApiFactory = function (configuration, basePath, axios) {
     const localVarFp = B2bApiFp(configuration);
     return {
         /**
-         * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+         * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
          * @param {B2bApiB2bAttachCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1062,7 +1062,7 @@ export const B2bApiFactory = function (configuration, basePath, axios) {
  */
 export class B2bApi extends BaseAPI {
     /**
-     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - list of ContractPageSerializer - the contracts for the user
+     * Use the provided enrollment code to attach the user to a B2B contract.  This will not create an order, nor will it enroll the user. It will attach the user to the contract and log that the code was used for this purpose (but will _not_ invalidate the code, since we\'re not actually using it at this point).  This will respect the activation and expiration dates (of both the contract and the discount), and will make sure there\'s sufficient available seats in the contract. It will also make sure the code hasn\'t been used for attachment purposes before.  If the user is already in the contract, then we skip it.  Returns: - 201: Code successfully redeemed and user attached to new contract(s) - 200: Code valid but user already attached to all associated contracts - 404: Invalid or expired enrollment code - 409: Code valid but no available seats in associated contract(s) - list of ContractPageSerializer - the contracts for the user
      * @param {B2bApiB2bAttachCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7887,7 +7887,7 @@ export const ProgramEnrollmentsApiAxiosParamCreator = function (configuration) {
         }),
         /**
          * Unenroll the user from this program. This is simpler than the corresponding function for CourseRunEnrollments; edX doesn\'t really know what programs are so there\'s nothing to process there.
-         * @param {number} id Program enrollment ID
+         * @param {number} id Program ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7939,7 +7939,7 @@ export const ProgramEnrollmentsApiAxiosParamCreator = function (configuration) {
         }),
         /**
          * Retrieve a specific program enrollment using v2 serializers.
-         * @param {number} id Program enrollment ID
+         * @param {number} id Program ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7955,6 +7955,63 @@ export const ProgramEnrollmentsApiAxiosParamCreator = function (configuration) {
                 baseOptions = configuration.baseOptions;
             }
             const localVarRequestOptions = Object.assign(Object.assign({ method: 'GET' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+         * @param {V3ProgramEnrollmentRequestRequest} V3ProgramEnrollmentRequestRequest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v3ProgramEnrollmentsCreate: (V3ProgramEnrollmentRequestRequest_1, ...args_1) => __awaiter(this, [V3ProgramEnrollmentRequestRequest_1, ...args_1], void 0, function* (V3ProgramEnrollmentRequestRequest, options = {}) {
+            // verify required parameter 'V3ProgramEnrollmentRequestRequest' is not null or undefined
+            assertParamExists('v3ProgramEnrollmentsCreate', 'V3ProgramEnrollmentRequestRequest', V3ProgramEnrollmentRequestRequest);
+            const localVarPath = `/api/v3/program_enrollments/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'POST' }, baseOptions), options);
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = Object.assign(Object.assign(Object.assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+            localVarRequestOptions.data = serializeDataIfNeeded(V3ProgramEnrollmentRequestRequest, localVarRequestOptions, configuration);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        }),
+        /**
+         * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+         * @param {number} program_id Program ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v3ProgramEnrollmentsDestroy: (program_id_1, ...args_1) => __awaiter(this, [program_id_1, ...args_1], void 0, function* (program_id, options = {}) {
+            // verify required parameter 'program_id' is not null or undefined
+            assertParamExists('v3ProgramEnrollmentsDestroy', 'program_id', program_id);
+            const localVarPath = `/api/v3/program_enrollments/{program_id}/`
+                .replace(`{${"program_id"}}`, encodeURIComponent(String(program_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign(Object.assign({ method: 'DELETE' }, baseOptions), options);
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -8072,7 +8129,7 @@ export const ProgramEnrollmentsApiFp = function (configuration) {
         },
         /**
          * Unenroll the user from this program. This is simpler than the corresponding function for CourseRunEnrollments; edX doesn\'t really know what programs are so there\'s nothing to process there.
-         * @param {number} id Program enrollment ID
+         * @param {number} id Program ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8101,7 +8158,7 @@ export const ProgramEnrollmentsApiFp = function (configuration) {
         },
         /**
          * Retrieve a specific program enrollment using v2 serializers.
-         * @param {number} id Program enrollment ID
+         * @param {number} id Program ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -8111,6 +8168,36 @@ export const ProgramEnrollmentsApiFp = function (configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.v2ProgramEnrollmentsRetrieve(id, options);
                 const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const operationBasePath = (_c = (_b = operationServerMap['ProgramEnrollmentsApi.v2ProgramEnrollmentsRetrieve']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            });
+        },
+        /**
+         * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+         * @param {V3ProgramEnrollmentRequestRequest} V3ProgramEnrollmentRequestRequest
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v3ProgramEnrollmentsCreate(V3ProgramEnrollmentRequestRequest, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.v3ProgramEnrollmentsCreate(V3ProgramEnrollmentRequestRequest, options);
+                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const operationBasePath = (_c = (_b = operationServerMap['ProgramEnrollmentsApi.v3ProgramEnrollmentsCreate']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
+                return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+            });
+        },
+        /**
+         * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+         * @param {number} program_id Program ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v3ProgramEnrollmentsDestroy(program_id, options) {
+            return __awaiter(this, void 0, void 0, function* () {
+                var _a, _b, _c;
+                const localVarAxiosArgs = yield localVarAxiosParamCreator.v3ProgramEnrollmentsDestroy(program_id, options);
+                const index = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
+                const operationBasePath = (_c = (_b = operationServerMap['ProgramEnrollmentsApi.v3ProgramEnrollmentsDestroy']) === null || _b === void 0 ? void 0 : _b[index]) === null || _c === void 0 ? void 0 : _c.url;
                 return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
             });
         },
@@ -8205,6 +8292,24 @@ export const ProgramEnrollmentsApiFactory = function (configuration, basePath, a
             return localVarFp.v2ProgramEnrollmentsRetrieve(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+         * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v3ProgramEnrollmentsCreate(requestParameters, options) {
+            return localVarFp.v3ProgramEnrollmentsCreate(requestParameters.V3ProgramEnrollmentRequestRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+         * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v3ProgramEnrollmentsDestroy(requestParameters, options) {
+            return localVarFp.v3ProgramEnrollmentsDestroy(requestParameters.program_id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * ViewSet for user program enrollments with v3 serializers.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8287,6 +8392,26 @@ export class ProgramEnrollmentsApi extends BaseAPI {
      */
     v2ProgramEnrollmentsRetrieve(requestParameters, options) {
         return ProgramEnrollmentsApiFp(this.configuration).v2ProgramEnrollmentsRetrieve(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Create a program enrollment for the authenticated user.  Returns 200 if the user already has an active enrollment, 201 if a new enrollment was created or an inactive one was reactivated.
+     * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsCreateRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramEnrollmentsApi
+     */
+    v3ProgramEnrollmentsCreate(requestParameters, options) {
+        return ProgramEnrollmentsApiFp(this.configuration).v3ProgramEnrollmentsCreate(requestParameters.V3ProgramEnrollmentRequestRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Unenroll the user from this program.  Returns 204 No Content. Idempotent - returns 204 even if not currently enrolled. Returns 404 if the program does not exist.
+     * @param {ProgramEnrollmentsApiV3ProgramEnrollmentsDestroyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProgramEnrollmentsApi
+     */
+    v3ProgramEnrollmentsDestroy(requestParameters, options) {
+        return ProgramEnrollmentsApiFp(this.configuration).v3ProgramEnrollmentsDestroy(requestParameters.program_id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * ViewSet for user program enrollments with v3 serializers.
